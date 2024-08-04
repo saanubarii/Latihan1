@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuisioner Masa Depan</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2JxUrgD3Hf3luj5hzGTdU5N_eOvbrCBOpU7QnbbnumRyHXXXxce-GRbc&s=10') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            width: 70%;
+        }
+
+        .marquee div {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 10s linear infinite;
+            font-size: 16px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .form-container {
+            position: relative;
+            top: 60px;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-page {
+            display: none;
+        }
+
+        .form-page.active {
+            display: block;
+        }
+
+        .form-page h2 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            backdrop-filter: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .thank-you {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .thank-you-text {
+            animation: textAnimation 3s infinite;
+        }
+
+        .additional-text {
+            display: none;
+            animation: fadeIn 2s ease-in-out;
+            font-size: 28px;
+            margin-top: 20px;
+        }
+
+        @keyframes textAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">ryodev</div>
+        <div class="marquee">
+            <div>makasih buat semua responden. Jangan lupa bayar paylater</div>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <form id="questionnaire">
+            <!-- Form Pages -->
+            <div class="form-page active" id="form1">
+                <h2>Bagian 1</h2>
+                <label>1. Seberapa sering Anda memikirkan masa depan?</label>
+                <input type="text" name="q1" required>
+                <button type="button" onclick="nextForm(1)">Lanjutkan</button>
+            </div>
+            <div class="form-page" id="form2">
+                <h2>Bagian 2</h2>
+                <label>2. Apa yang paling Anda khawatirkan tentang masa depan?</label>
+                <input type="text" name="q2" required>
+                <button type="button" onclick="nextForm(2)">Lanjutkan</button>
+            </div>
+            <div class="form-page" id="form3">
+                <h2>Bagian 3</h2>
+                <label>3. Seberapa yakin Anda dengan rencana masa depan Anda?</label>
+                <input type="text" name="q3" required>
+                <button type="button" onclick="nextForm(3)">Lanjutkan</button>
+            </div>
+            <div class="form-page" id="form4">
+                <h2>Bagian 4</h2>
+                <label>4. Apakah Anda memiliki tujuan jangka panjang?</label>
+                <input type="text" name="q4" required>
+                <button type="button" onclick="nextForm(4)">Lanjutkan</button>
+            </div>
+            <div class="form-page" id="form5">
+                <h2>Bagian 5</h2>
+                <label>5. Bagaimana Anda mengukur keberhasilan dalam mencapai tujuan Anda?</label>
+                <input type="text" name="q5" required>
+                <button type="button" onclick="nextForm(5)">Lanjutkan</button>
+            </div>
+            <div class="form-page" id="form6">
+                <h2>Bagian 6</h2>
+                <label>6. Seberapa sering Anda meninjau dan memperbarui rencana masa depan Anda?</label>
+                <input type="text" name="q6" required>
+                <button type="button" onclick="nextForm(6)">Lanjutkan</button>
+            </div>
+            <div class="form-page" id="form7">
+                <h2>Bagian 7</h2>
+                <label>7. Bagaimana Anda menggambarkan masa depan ideal Anda?</label>
+                <input type="text" name="q7" required>
+                <button type="button" onclick="showThankYou()">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="thank-you" id="thank-you">
+        <div class="thank-you-text" id="thank-you-text">Terimakasih</div>
+        <div class="additional-text" id="additional-text-1">ngapain masih di sini?</div>
+        <div class="additional-text" id="additional-text-2">udah keisi semua</div>
+        <div class="additional-text" id="additional-text-3">astaganagaaa</div>
+    </div>
+
+    <script>
+    function nextForm(currentForm) {
+    const currentInput = document.querySelector(`#form${currentForm} input`);
+    if (currentInput.value.trim() === '') {
+        alert('Silakan isi pertanyaan sebelum melanjutkan.');
+        return;
+    }
+    document.getElementById(`form${currentForm}`).classList.remove('active');
+    document.getElementById(`form${currentForm + 1}`).classList.add('active');
+}
+
+function showThankYou() {
+    const currentInput = document.querySelector(`#form7 input`);
+    if (currentInput.value.trim() === '') {
+        alert('Silakan isi pertanyaan sebelum melanjutkan.');
+        return;
+    }
+    document.getElementById('questionnaire').style.display = 'none';
+    document.getElementById('thank-you').style.display = 'flex';
+
+    setTimeout(() => {
+        document.getElementById('thank-you-text').style.display = 'none';
+        document.getElementById('additional-text-1').style.display = 'block';
+    }, 10000); // Tampilkan "Terimakasih" selama 10 detik
+
+    setTimeout(() => {
+        document.getElementById('additional-text-1').style.display = 'none';
+        document.getElementById('additional-text-2').style.display = 'block';
+    }, 13000); // Tampilkan "ngapain masih di sini?" setelah 13 detik
+
+    setTimeout(() => {
+        document.getElementById('additional-text-2').style.display = 'none';
+        document.getElementById('additional-text-3').style.display = 'block';
+    }, 23000); // Tampilkan "udah keisi semua" setelah 23 detik
+
+    setTimeout(() => {
+        document.getElementById('additional-text-3').style.display = 'none';
+        document.getElementById('additional-text-4').style.display = 'block';
+    }, 33000); // Tampilkan "astaganagaaa" setelah 33 detik
+}
+
+</script>
+
+</body>
+</html>
